@@ -3,135 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Landing Page</title>
+<title>Temperature Converter</title>
 <style>
   body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
   }
-
   .container {
-    max-width: 1200px;
+    max-width: 400px;
     margin: 0 auto;
     padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
   }
-
-  header {
-    background-color: #6a0dad;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
+  label {
+    display: block;
+    margin-bottom: 10px;
   }
-
-  nav {
-    background-color: #8b5ebd;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-  }
-
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  nav ul li {
-    display: inline;
-    margin-right: 20px;
-  }
-
-  section {
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-  }
-
-  .hero {
-    background-color: #8b5ebd;
-    color: #fff;
-    text-align: center;
-    padding: 100px 0;
-    margin-bottom: 20px;
-  }
-
-  .hero h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
-
-  .hero p {
-    font-size: 18px;
-  }
-
-  .feature {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .feature-item {
-    flex: 1;
-    text-align: center;
-    padding: 20px;
-  }
-
-  footer {
-    background-color: #6a0dad;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    position: fixed;
+  input[type="text"] {
     width: 100%;
-    bottom: 0;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+  .result {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
   }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>New Model Design Landing Page</h1>
-</header>
-
-<nav>
-  <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Services</a></li>
-    <li><a href="#">Contact</a></li>
-  </ul>
-</nav>
-
 <div class="container">
-  <section class="hero">
-    <h1>Welcome to Our Landing Page</h1>
-    <p>purple color scheme</p>
-  </section>
+  <h2>Temperature Converter</h2>
+  <label for="temperature">Temperature:</label>
+  <input type="text" id="temperature" placeholder="Enter temperature" required>
 
-  <section class="feature">
-    <div class="feature-item">
-      <h2>Easy to Use</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </div>
-    <div class="feature-item">
-      <h2>Responsive</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </div>
-    <div class="feature-item">
-      <h2>Impressive Design</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </div>
-  </section>
+  <label for="unit">Unit:</label>
+  <select id="unit">
+    <option value="celsius">Celsius</option>
+    <option value="fahrenheit">Fahrenheit</option>
+    <!-- For an extra challenge, you can add Kelvin as an option -->
+  </select>
+
+  <button onclick="convertTemperature()">Convert</button>
+
+  <div class="result" id="result"></div>
 </div>
 
-<footer>
-  <p>&copy; 2024 New Model Design. All rights reserved.</p>
-
-</footer>
+<script>
+function convertTemperature() {
+  var temperatureInput = document.getElementById("temperature").value;
+  var unit = document.getElementById("unit").value;
+  var convertedTemperature;
+  
+  if (isNaN(temperatureInput)) {
+    alert("Please enter a valid number for temperature.");
+    return;
+  }
+  
+  if (unit === "celsius") {
+    convertedTemperature = (temperatureInput * 9/5) + 32;
+    document.getElementById("result").innerHTML = temperatureInput + "°C is " + convertedTemperature.toFixed(2) + "°F";
+  } else if (unit === "fahrenheit") {
+    convertedTemperature = (temperatureInput - 32) * 5/9;
+    document.getElementById("result").innerHTML = temperatureInput + "°F is " + convertedTemperature.toFixed(2) + "°C";
+  }
+  // For an extra challenge, you can add conversion for Kelvin
+}
+</script>
 
 </body>
 </html>
